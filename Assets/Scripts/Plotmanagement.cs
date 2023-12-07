@@ -68,7 +68,7 @@ public class Plotmanagement : MonoBehaviour
                     
                 }
             }
-            else if (fm.isPlanting && fm.selectPlant.plant.buyPrice <= fm.money)
+            else if (fm.isPlanting && fm.selectPlant.plant.buyPrice <= fm.money && isBought)
             {
                 Plant(fm.selectPlant.plant);
             }
@@ -77,7 +77,7 @@ public class Plotmanagement : MonoBehaviour
 
         if (fm.isPlanting)
         {
-            if (isPlanted || fm.selectPlant.plant.buyPrice > fm.money)
+            if (isPlanted || fm.selectPlant.plant.buyPrice > fm.money || !isBought)
             {
                 plot.color = unavailableColor;
             }
