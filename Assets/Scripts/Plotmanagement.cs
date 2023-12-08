@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Plotmanagement : MonoBehaviour
 {
-
+    SpriteRenderer coin;
     bool isPlanted = false;
     SpriteRenderer plant;
     int plantStage = 0;
@@ -22,10 +22,12 @@ public class Plotmanagement : MonoBehaviour
     public Sprite unavailableSprite;
     float speed = 1f;
     public bool isBought = true;
+    float coin_timer;
     // Start is called before the first frame update
     void Start()
     {
         plant = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        coin = transform.GetChild(1).GetComponent<SpriteRenderer>();
         plantCollider = transform.GetChild(0).GetComponent<BoxCollider2D>();
         fm = transform.parent.GetComponent<farmManage>();
         plot = GetComponent<SpriteRenderer>();
@@ -45,18 +47,27 @@ public class Plotmanagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(isPlanted && !isDry)
+        if (isPlanted && !isDry)
         {
-            timer -= speed*Time.deltaTime;
+            timer -= speed * Time.deltaTime;
             if (timer < 0 && plantStage < selectedPlant.plantStages.Length - 1)
             {
                 timer = selectedPlant.timeBtwStages;
                 plantStage++;
                 UpdatePlant();
             }
+            else
+            {
+                coin_timer -= Time.deltaTime;
+                if (coin_timer < 0)
+                {
+                    coin.gameObject.SetActive(false);
+                }
+            }
+
         }
     }
-    private void OnMouseOver()
+        private void OnMouseOver()
     {
         if(Input.GetMouseButton(0))
             {
@@ -91,6 +102,17 @@ public class Plotmanagement : MonoBehaviour
             switch (fm.selectedTool)
             {
                 case 1:
+                    if (Input.GetMouseButton(0))
+                    {
+                        if (isBought)
+                        {
+                            isDry = false;
+                            plot.sprite = normalSprite;
+                            if (isPlanted) UpdatePlant();
+                        }
+                    }
+                   
+                    break;
                 case 2:
                     if (isBought && fm.money >= (fm.selectedTool - 1) * 10)
                     {
@@ -123,15 +145,7 @@ public class Plotmanagement : MonoBehaviour
         {
             switch (fm.selectedTool)
             {
-                case 1:
-                    if (isBought)
-                    {
-                        isDry = false;
-                        plot.sprite = normalSprite;
-                        if (isPlanted) UpdatePlant();
-                    }
-                   
-                    break;
+                    
                 case 2:
                     if (fm.money >= 5 && isBought)
                     {
@@ -164,6 +178,9 @@ public class Plotmanagement : MonoBehaviour
         isDry = true;
         plot.sprite = drySprite;
         speed = 1f;
+        coin.gameObject.SetActive(true);
+        coin_timer = 1f;  //Time in second per frame
+
     }
     void Plant(plantObject newPlant)
     {
