@@ -73,8 +73,9 @@ public class Plotmanagement : MonoBehaviour
             {
             if (isPlanted)
             {
-                if (plantStage == selectedPlant.plantStages.Length - 1 && !fm.isPlanting && !fm.isSelecting)
+                if (plantStage == selectedPlant.plantStages.Length - 1 && !fm.isPlanting  && fm.selectedTool == 4)
                 {
+                    plot.color = availableColor;
                     Harvest();
                     
                 }

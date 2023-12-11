@@ -15,21 +15,20 @@ public class farmManage : MonoBehaviour
     public bool isSelecting = false;
     public int selectedTool = 0;
 
-    public Image[] buttonsImg;
+    public Image[] buttonsImg = new Image[4]; // Resize the array to hold four buttons
     public Sprite normalButton;
     public Sprite selectedButton;
-    // Start is called before the first frame update
+
     void Start()
     {
         moneyTxt.text = "$" + money;
     }
+
     public void SelectPlant(ItemPlant newPlant)
     {
         if (selectPlant == newPlant)
         {
-
-            CheckSelection();  
-
+            CheckSelection();
         }
         else
         {
@@ -37,13 +36,13 @@ public class farmManage : MonoBehaviour
             selectPlant = newPlant;
             selectPlant.btnImage.color = CancelColor;
             selectPlant.btnTxt.text = "Cancel";
-            
             isPlanting = true;
         }
     }
+
     public void SelectTool(int toolNumber)
     {
-        if(toolNumber == selectedTool)
+        if (toolNumber == selectedTool)
         {
             CheckSelection();
         }
@@ -52,9 +51,10 @@ public class farmManage : MonoBehaviour
             CheckSelection();
             isSelecting = true;
             selectedTool = toolNumber;
-            buttonsImg[toolNumber - 1].sprite = selectedButton;
+            buttonsImg[toolNumber - 1].sprite = selectedButton; // Assuming toolNumber starts from 1
         }
     }
+
     void CheckSelection()
     {
         if (isPlanting)
@@ -69,7 +69,7 @@ public class farmManage : MonoBehaviour
         }
         if (isSelecting)
         {
-            if(selectedTool > 0)
+            if (selectedTool > 0 && selectedTool <= buttonsImg.Length) // Check the array bounds
             {
                 buttonsImg[selectedTool - 1].sprite = normalButton;
             }
@@ -81,6 +81,6 @@ public class farmManage : MonoBehaviour
     public void Transaction(int value)
     {
         money += value;
-        moneyTxt.text = "$" + money; 
+        moneyTxt.text = "$" + money;
     }
 }
