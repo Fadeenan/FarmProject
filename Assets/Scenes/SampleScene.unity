@@ -2231,6 +2231,10 @@ PrefabInstance:
       propertyPath: isBought
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2609623922006805265, guid: a07a59b13d804e94c8f5200a212c3fea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3279181198362958651, guid: a07a59b13d804e94c8f5200a212c3fea, type: 3}
       propertyPath: m_Name
       value: plot
@@ -2275,6 +2279,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6468865575521376004, guid: a07a59b13d804e94c8f5200a212c3fea, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7c0126d2045913f4a9020a6225fff225, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2689,7 +2697,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6664,6 +6672,7 @@ MonoBehaviour:
   - {fileID: 1400814664}
   - {fileID: 577746573}
   - {fileID: 98027251}
+  - {fileID: 2070948906}
   normalButton: {fileID: -553195993, guid: d0752d871eaddf841bda25b2321a1418, type: 3}
   selectedButton: {fileID: 849950143, guid: d0752d871eaddf841bda25b2321a1418, type: 3}
 --- !u!1001 &1664634787
@@ -8468,7 +8477,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
