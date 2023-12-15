@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Plotmanagement : MonoBehaviour
 {
-    SpriteRenderer coin;
     bool isPlanted = false;
     SpriteRenderer plant;
     int plantStage = 0;
@@ -22,12 +21,10 @@ public class Plotmanagement : MonoBehaviour
     public Sprite unavailableSprite;
     float speed = 1f;
     public bool isBought = true;
-    float coin_timer;
     // Start is called before the first frame update
     void Start()
     {
         plant = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        coin = transform.GetChild(1).GetComponent<SpriteRenderer>();
         plantCollider = transform.GetChild(0).GetComponent<BoxCollider2D>();
         fm = transform.parent.GetComponent<farmManage>();
         plot = GetComponent<SpriteRenderer>();
@@ -56,14 +53,6 @@ public class Plotmanagement : MonoBehaviour
                 plantStage++;
                 UpdatePlant();
             }
-            else
-            {
-                coin_timer -= Time.deltaTime;
-                if (coin_timer < 0)
-                {
-                    coin.gameObject.SetActive(false);
-                }
-            }
 
         }
     }
@@ -84,7 +73,11 @@ public class Plotmanagement : MonoBehaviour
             {
                 Plant(fm.selectPlant.plant);
             }
-            
+            else
+            {
+                plot.color = unavailableColor;
+            }
+
         }
 
         if (fm.isPlanting)
@@ -110,6 +103,11 @@ public class Plotmanagement : MonoBehaviour
                             isDry = false;
                             plot.sprite = normalSprite;
                             if (isPlanted) UpdatePlant();
+                            plot.color = availableColor;
+                        }
+                        else
+                        {
+                            plot.color = unavailableColor;
                         }
                     }
                    
@@ -135,7 +133,7 @@ public class Plotmanagement : MonoBehaviour
                     }
                     break;
                 default:
-                    plot.color = unavailableColor;
+                    
                     break;
             }
         }
@@ -179,8 +177,7 @@ public class Plotmanagement : MonoBehaviour
         isDry = true;
         plot.sprite = drySprite;
         speed = 1f;
-        coin.gameObject.SetActive(true);
-        coin_timer = 1f;  //Time in second per frame
+        
 
     }
     void Plant(plantObject newPlant)
